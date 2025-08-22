@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
@@ -11,11 +12,14 @@ class StoreRetailApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'job_id'    => [
+                'required','integer',
+                Rule::exists('careers', 'id')->where(fn ($q) => $q->where('status','active'))
+            ],
             'full_name' => ['required','string','max:191'],
             'email'     => ['required','email:rfc','max:191'],
             'phone'     => ['required','string','max:50'],
-
-            'cv' => ['required','file','mimes:pdf,doc,docx,jpg,jpeg,png','max:10120'],
+            'cv'        => ['required','file','mimes:pdf,doc,docx,jpg,jpeg,png','max:5120'],
             'linkedin_url' => ['nullable','url'],
             'cover_letter' => ['nullable','string','max:5000'],
         ];
@@ -32,3 +36,4 @@ class StoreRetailApplicationRequest extends FormRequest
         );
     }
 }
+

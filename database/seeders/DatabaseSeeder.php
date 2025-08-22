@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $this->call(\Database\Seeders\SiteSettingSeeder::class);
+        $this->call(\Database\Seeders\CareerSeeder::class);
 
     }
 }
