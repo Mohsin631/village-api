@@ -8,6 +8,7 @@ use App\Http\Controllers\API\NewsletterController;
 use App\Http\Controllers\API\SubscribeNowController;
 use App\Http\Controllers\API\BoardMemberController;
 use App\Http\Controllers\API\SettingsController;
+use App\Http\Controllers\API\PartnerRequestController;
 
 Route::prefix('v1')->group(function () {
     Route::get('inquiry-types', [InquiryTypeController::class, 'index']);
@@ -17,6 +18,7 @@ Route::prefix('v1')->group(function () {
     Route::get('board-members', [BoardMemberController::class, 'index']);
     Route::get('settings/contact', [SettingsController::class, 'contact']);
     Route::get('settings/{key}', [SettingsController::class, 'show'])->where('key', '[A-Za-z0-9_\-]+');
+    Route::post('partners', [PartnerRequestController::class, 'store']);
 });
 
 Route::fallback(function () {
