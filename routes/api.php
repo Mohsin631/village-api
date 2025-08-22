@@ -6,12 +6,15 @@ use App\Http\Controllers\API\InquiryTypeController;
 use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\NewsletterController;
 use App\Http\Controllers\API\SubscribeNowController;
+use App\Http\Controllers\API\BoardMemberController;
 
 Route::prefix('v1')->group(function () {
     Route::get('inquiry-types', [InquiryTypeController::class, 'index']);
     Route::post('contact', [ContactController::class, 'store']);
     Route::post('newsletter', [NewsletterController::class, 'subscribe']);
     Route::post('subscribe',  [SubscribeNowController::class, 'store']);  
+    Route::get('board-members', [BoardMemberController::class, 'index']);
+
 });
 
 Route::fallback(function () {
