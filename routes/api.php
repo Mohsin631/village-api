@@ -21,8 +21,8 @@ Route::prefix('v1')->group(function () {
     Route::get('settings/contact', [SettingsController::class, 'contact']);
     Route::get('settings/{key}', [SettingsController::class, 'show'])->where('key', '[A-Za-z0-9_\-]+');
     Route::post('partners', [PartnerRequestController::class, 'store']);
-    Route::post('retail-applications', [RetailApplicationController::class, 'store']);
     Route::get('careers', [CareerController::class, 'index']);
+    Route::post('careers/apply', [RetailApplicationController::class, 'store']);
 });
 
 Route::fallback(function () {
