@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class ContactMessage extends Model
 {
     protected $fillable = [
-        'full_name','email','phone','inquiry_type_id','message','lang','ip','user_agent'
+        'full_name','email','phone','inquiry_type_id','message','lang','ip','user_agent','status','priority','admin_note','handled_by'
     ];
     public function inquiryType() { return $this->belongsTo(InquiryType::class); }
+
+    public function handledBy() {
+        return $this->belongsTo(User::class, 'handled_by');
+    }
 }

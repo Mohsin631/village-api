@@ -71,16 +71,23 @@
       <div class="card-soft">
         <div class="d-flex align-items-center justify-content-between mb-2">
           <h5 class="mb-0">Engagement Overview</h5>
-          <div class="btn-group btn-group-sm">
-            <button class="btn btn-outline-secondary active">7d</button>
-            <button class="btn btn-outline-secondary">30d</button>
-            <button class="btn btn-outline-secondary">90d</button>
+          <div class="btn-group btn-group-sm" id="chartRange">
+            <button class="btn btn-outline-secondary active" data-range="7">7d</button>
+            <button class="btn btn-outline-secondary" data-range="30">30d</button>
+            <button class="btn btn-outline-secondary" data-range="90">90d</button>
           </div>
         </div>
-        <div class="mini-chart"></div>
-        <div class="small text-muted mt-2">Lightweight chart placeholder. Swap with Chart.js later if needed.</div>
+    
+        <div style="height:300px">
+          <canvas id="engagementChart"></canvas>
+        </div>
+    
+        <div class="small text-muted mt-2">
+          Engagement metrics for newsletter, inquiries, and subscribers.
+        </div>
       </div>
     </div>
+    
 
     <div class="col-12 col-lg-4">
       <div class="card-soft">
@@ -138,4 +145,60 @@
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const ctx = document.getElementById('engagementChart').getContext('2d');
+    
+      const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: {!! json_encode(array_keys($newsletterData->toArray())) !!},
+          datasets: [
+            {
+              label: 'Newsletters',
+              data: {!! json_encode(array_values($newsletterData->toArray())) !!},
+              borderColor: '#d4af37',
+              borderWidth: 2,
+              tension: 0.3,
+              fill: false
+            },
+            {
+              label: 'Inquiries',
+              data: {!! json_encode(array_values($inquiriesData->toArray())) !!},
+              borderColor: '#1890ff',
+              borderWidth: 2,
+              tension: 0.3,
+              fill: false
+            },
+            {
+              label: 'Subscribers',
+              data: {!! json_encode(array_values($subscribersData->toArray())) !!},
+              borderColor: '#28a745',
+              borderWidth: 2,
+              tension: 0.3,
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: true, position: 'top' }
+          },
+          scales: {
+            x: {
+              ticks: { autoSkip: true, maxTicksLimit: 7 }
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+    </script>
+    
+    
 @endsection

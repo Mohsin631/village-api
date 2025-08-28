@@ -214,9 +214,15 @@
           <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
             <i class="bi bi-speedometer2"></i> Dashboard
           </a>
-          <a href="#"><i class="bi bi-people"></i> Users</a>
-          <a href="#"><i class="bi bi-inboxes"></i> Inquiries</a>
-          <a href="#"><i class="bi bi-envelope-paper"></i> Newsletter</a>
+          <a href="{{ route('admin.newsletters.index') }}" class="{{ request()->routeIs('admin.newsletters.index') ? 'active' : '' }}">
+            <i class="bi bi-envelope-paper"></i> Newsletter
+          </a>
+          <a href="{{ route('admin.subscribers.index') }}" class="{{ request()->routeIs('admin.subscribers.index') ? 'active' : '' }}">
+            <i class="bi bi-people"></i> Subscribers
+          </a> 
+          <a href="{{ route('admin.inquiries.index') }}" class="{{ request()->routeIs('admin.inquiries.index') ? 'active' : '' }}">
+            <i class="bi bi-inboxes"></i> Inquiries
+          </a>                   
           <a href="#"><i class="bi bi-briefcase"></i> Careers</a>
           <a href="#"><i class="bi bi-gear"></i> Settings</a>
           <a href="{{ route('admin.logout') }}" class="mt-2" style="background:rgba(255,255,255,.10)">
@@ -232,10 +238,10 @@
             <h1 class="h4 fw-bold mb-1">@yield('title','Dashboard')</h1>
             <div class="text-muted small">Welcome back, {{ Auth::user()->name ?? 'Admin' }}.</div>
           </div>
-          <div class="d-flex gap-2">
+          {{-- <div class="d-flex gap-2">
             <a class="btn btn-gold" href="#"><i class="bi bi-plus-lg me-1"></i> New</a>
             <a class="btn btn-outline-secondary" href="#"><i class="bi bi-upload me-1"></i> Export</a>
-          </div>
+          </div> --}}
         </div>
 
         @yield('content')
@@ -244,6 +250,7 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     const root = document.documentElement;
 

@@ -11,6 +11,7 @@ use App\Models\RetailApplication;
 use App\Models\Career;
 use App\Models\RecentActivity;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -41,12 +42,41 @@ class DashboardController extends Controller
         // Recent Activity
         $recentActivity = RecentActivity::latest()->take(10)->get();
 
+        // Chart data
+
+        // Newsletter signups in last 30 days
+        $newsletterData = Newsletter::select(
+            DB::raw('DATE(created_at) as date'),
+            DB::raw('count(*) as total')
+        )->where('created_at', '>=', now()->subDays(30))
+        ->groupBy('date')
+        ->orderBy('date')
+        ->pluck('total','date');
+
+        // Inquiries in last 30 days
+        $inquiriesData = ContactMessage::select(
+            DB::raw('DATE(created_at) as date'),
+            DB::raw('count(*) as total')
+        )->where('created_at', '>=', now()->subDays(30))
+        ->groupBy('date')
+        ->orderBy('date')
+        ->pluck('total','date');
+
+        // Subscribers in last 30 days
+        $subscribersData = Subscription::select(
+            DB::raw('DATE(created_at) as date'),
+            DB::raw('count(*) as total')
+        )->where('created_at', '>=', now()->subDays(30))
+        ->groupBy('date')
+        ->orderBy('date')
+        ->pluck('total','date');
+
         return view('admin.dashboard', compact(
             'totalNewsletter','newsletterThisWeek','newsletterPercent',
             'totalInquiries','inquiriesToday','inquiriesPercent',
             'totalSubscribers','subscribersThisWeek','subscribersPercent',
             'openRoles','newRoles','rolesPercent',
-            'recentActivity'
+            'recentActivity','newsletterData','inquiriesData','subscribersData'
         ));
     }
 }
