@@ -29,6 +29,7 @@ Route::prefix('v1')->group(function () {
     // Blog api
 
     Route::get('blogs', [BlogController::class, 'index']);
+    Route::get('blogs/{id}', [BlogController::class, 'show']);
     Route::get('blog-categories', [BlogCategoryController::class, 'index']);
     Route::get('blogs/category/{id}', [BlogController::class, 'byCategory']);
 });

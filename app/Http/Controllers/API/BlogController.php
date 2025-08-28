@@ -29,6 +29,14 @@ class BlogController extends Controller
 
         return response()->json($blogs->map(fn($b) => $b->translate($lang)));
     }
+
+    public function show(Request $request, $id)
+    {
+        $lang = $request->query('lang','en');
+        $blog = Blog::with('category')->findOrFail($id);
+
+        return response()->json($blog->translate($lang));
+    }
 }
 
 
