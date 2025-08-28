@@ -7,6 +7,7 @@ use App\Http\Requests\StorePartnerRequest;
 use App\Http\Resources\PartnerRequestResource;
 use App\Models\PartnerRequest;
 use Illuminate\Http\Request;
+use App\Models\RecentActivity;
 
 class PartnerRequestController extends Controller
 {
@@ -21,6 +22,11 @@ class PartnerRequestController extends Controller
         $data['user_agent'] = substr((string) $request->userAgent(), 0, 512);
 
         $pr = PartnerRequest::create($data);
+
+        RecentActivity::create([
+            'message' => "Partner request received from {$partner->company_name}",
+            'type'    => 'partner_request'
+        ]);
 
         return (new PartnerRequestResource($pr))
             ->additional(['status' => 'ok', 'message' => $lang === 'ar' ? 'تم إرسال الطلب' : 'Request submitted'])

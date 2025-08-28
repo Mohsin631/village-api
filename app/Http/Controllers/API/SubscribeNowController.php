@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubscriptionRequest;
 use App\Models\Subscription;
 use App\Jobs\SendGlobalMail;
+use App\Models\RecentActivity;
 
 class SubscribeNowController extends Controller
 {
     public function store(StoreSubscriptionRequest $request)
     {
         $record = Subscription::firstOrCreate(['email' => $request->validated()['email']]);
+
+        RecentActivity::create([
+            'message' => "New inquiry from {$record->email}",
+            'type'    => 'inquiry'
+        ]);
 
         return response()->json([
             'status'  => 'ok',

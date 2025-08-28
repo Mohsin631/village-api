@@ -7,6 +7,7 @@ use App\Http\Requests\StoreContactRequest;
 use App\Http\Resources\ContactMessageResource;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use App\Models\RecentActivity;
 
 class ContactController extends Controller
 {
@@ -22,7 +23,10 @@ class ContactController extends Controller
 
         $msg = ContactMessage::create($data);
 
-        // Optional: dispatch job/email/notification here
+        RecentActivity::create([
+            'message' => "New inquiry from {$request->full_name}",
+            'type'    => 'inquiry'
+        ]);
 
         return (new ContactMessageResource($msg))
             ->additional(['status' => 'ok'])

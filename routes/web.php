@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\SubscribeNowController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\AdminTwoFactor;
+
 
 Route::get('/', function () {
     return response()->json([
@@ -31,9 +33,8 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::middleware([AdminAuthenticate::class, AdminTwoFactor::class])->group(function () {
-        Route::get('dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+        Route::get('dashboard', [DashboardController::class , 'index'])->name('admin.dashboard');
+        
 
     });
 });

@@ -10,12 +10,12 @@
         <div class="kpi">
           <div class="kpi-icon"><i class="bi bi-people"></i></div>
           <div>
-            <div class="small text-muted">Users</div>
-            <div class="h5 fw-bold">1,248</div>
+            <div class="small text-muted">Total Newsletter</div>
+            <div class="h5 fw-bold">{{ $totalNewsletter }}</div>
             <div class="progress-wrap mt-2">
-              <div class="progress-bar-gold" style="--val:68%"></div>
+              <div class="progress-bar-gold" style="--val:{{ $newsletterPercent }}%"></div>
             </div>
-            <div class="small text-muted mt-1">+12% this week</div>
+            <div class="small text-muted mt-1">+{{ $newsletterThisWeek }} this week</div>
           </div>
         </div>
       </div>
@@ -26,11 +26,11 @@
           <div class="kpi-icon"><i class="bi bi-inboxes"></i></div>
           <div>
             <div class="small text-muted">Inquiries</div>
-            <div class="h5 fw-bold">87</div>
+            <div class="h5 fw-bold">{{ $totalInquiries }}</div>
             <div class="progress-wrap mt-2">
-              <div class="progress-bar-gold" style="--val:52%"></div>
+              <div class="progress-bar-gold" style="--val:{{ $inquiriesPercent }}%"></div>
             </div>
-            <div class="small text-muted mt-1">+6 today</div>
+            <div class="small text-muted mt-1">+{{ $inquiriesToday }} today</div>
           </div>
         </div>
       </div>
@@ -41,11 +41,11 @@
           <div class="kpi-icon"><i class="bi bi-envelope-paper"></i></div>
           <div>
             <div class="small text-muted">Subscribers</div>
-            <div class="h5 fw-bold">2,905</div>
+            <div class="h5 fw-bold">{{ $totalSubscribers }}</div>
             <div class="progress-wrap mt-2">
-              <div class="progress-bar-gold" style="--val:74%"></div>
+              <div class="progress-bar-gold" style="--val:{{ $subscribersPercent }}%"></div>
             </div>
-            <div class="small text-muted mt-1">+41 this week</div>
+            <div class="small text-muted mt-1">+{{ $subscribersThisWeek }} this week</div>
           </div>
         </div>
       </div>
@@ -56,11 +56,11 @@
           <div class="kpi-icon"><i class="bi bi-briefcase"></i></div>
           <div>
             <div class="small text-muted">Open Roles</div>
-            <div class="h5 fw-bold">12</div>
+            <div class="h5 fw-bold">{{ $openRoles }}</div>
             <div class="progress-wrap mt-2">
-              <div class="progress-bar-gold" style="--val:35%"></div>
+              <div class="progress-bar-gold" style="--val:{{ $rolesPercent }}%"></div>
             </div>
-            <div class="small text-muted mt-1">3 new</div>
+            <div class="small text-muted mt-1">{{ $newRoles }} new</div>
           </div>
         </div>
       </div>
@@ -86,27 +86,17 @@
       <div class="card-soft">
         <h5 class="mb-3">Recent Activity</h5>
         <ul class="list-unstyled m-0">
-          <li class="d-flex align-items-start gap-2 mb-3">
-            <i class="bi bi-dot text-warning fs-3 lh-1"></i>
-            <div>
-              <div class="fw-semibold">New inquiry from John Doe</div>
-              <div class="small text-muted">5 mins ago</div>
-            </div>
-          </li>
-          <li class="d-flex align-items-start gap-2 mb-3">
-            <i class="bi bi-dot text-warning fs-3 lh-1"></i>
-            <div>
-              <div class="fw-semibold">3 newsletter signups</div>
-              <div class="small text-muted">17 mins ago</div>
-            </div>
-          </li>
-          <li class="d-flex align-items-start gap-2 mb-1">
-            <i class="bi bi-dot text-warning fs-3 lh-1"></i>
-            <div>
-              <div class="fw-semibold">Retail application received</div>
-              <div class="small text-muted">1 hour ago</div>
-            </div>
-          </li>
+          @forelse($recentActivity as $activity)
+            <li class="d-flex align-items-start gap-2 mb-3">
+              <i class="bi bi-dot text-warning fs-3 lh-1"></i>
+              <div>
+                <div class="fw-semibold">{{ $activity->message }}</div>
+                <div class="small text-muted">{{ $activity->created_at->diffForHumans() }}</div>
+              </div>
+            </li>
+          @empty
+            <li class="text-muted">No recent activity yet</li>
+          @endforelse
         </ul>
       </div>
     </div>

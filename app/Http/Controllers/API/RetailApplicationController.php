@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRetailApplicationRequest;
 use App\Http\Resources\RetailApplicationResource;
 use App\Models\RetailApplication;
 use Illuminate\Support\Facades\Storage;
+use App\Models\RecentActivity;
 
 class RetailApplicationController extends Controller
 {
@@ -28,6 +29,11 @@ class RetailApplicationController extends Controller
             'lang'         => $lang,
             'ip'           => $request->ip(),
             'user_agent'   => substr((string) $request->userAgent(), 0, 512),
+        ]);
+
+        RecentActivity::create([
+            'message' => "Retail application received from {$app->full_name}",
+            'type'    => 'retail_application'
         ]);
     
         // optional: include job title in response

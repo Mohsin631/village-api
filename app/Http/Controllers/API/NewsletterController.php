@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNewsletterRequest;
 use App\Models\NewsletterSubscription;
+use App\Models\RecentActivity;
 
 class NewsletterController extends Controller
 {
@@ -16,6 +17,11 @@ class NewsletterController extends Controller
             ['email' => $request->validated()['email']]
         );
         $created = $record->wasRecentlyCreated;
+
+        RecentActivity::create([
+            'message' => "New newsletter signup: {$record->email}",
+            'type'    => 'newsletter'
+        ]);
 
         return response()->json([
             'status'  => 'ok',
