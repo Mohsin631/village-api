@@ -24,7 +24,7 @@ class PartnerRequestController extends Controller
         $pr = PartnerRequest::create($data);
 
         RecentActivity::create([
-            'message' => "Partner request received from {$partner->company_name}",
+            'message' => "Partner request received from {$pr->company_name}",
             'type'    => 'partner_request'
         ]);
 
