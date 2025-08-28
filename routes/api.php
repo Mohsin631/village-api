@@ -11,6 +11,8 @@ use App\Http\Controllers\API\SettingsController;
 use App\Http\Controllers\API\PartnerRequestController;
 use App\Http\Controllers\API\RetailApplicationController;
 use App\Http\Controllers\API\CareerController;
+use App\Http\Controllers\API\BlogController;
+use App\Http\Controllers\API\BlogCategoryController;
 
 Route::prefix('v1')->group(function () {
     Route::get('inquiry-types', [InquiryTypeController::class, 'index']);
@@ -23,6 +25,12 @@ Route::prefix('v1')->group(function () {
     Route::post('partners', [PartnerRequestController::class, 'store']);
     Route::get('careers', [CareerController::class, 'index']);
     Route::post('careers/apply', [RetailApplicationController::class, 'store']);
+
+    // Blog api
+
+    Route::get('blogs', [BlogController::class, 'index']);
+    Route::get('blog-categories', [BlogCategoryController::class, 'index']);
+    Route::get('blogs/category/{id}', [BlogController::class, 'byCategory']);
 });
 
 Route::fallback(function () {
