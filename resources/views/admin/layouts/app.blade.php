@@ -188,8 +188,7 @@
             <i class="bi bi-chevron-down small text-muted"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end shadow">
-            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+            <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}"><i class="bi bi-person me-2"></i>Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item text-danger" href="{{ route('admin.logout') }}"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
           </ul>
@@ -215,26 +214,40 @@
             <i class="bi bi-speedometer2"></i> Dashboard
           </a>
           <a href="{{ route('admin.newsletters.index') }}" class="{{ request()->routeIs('admin.newsletters.index') ? 'active' : '' }}">
-            <i class="bi bi-envelope-paper"></i> Newsletter
+            <i class="bi bi-envelope"></i> Newsletter
           </a>
           <a href="{{ route('admin.subscribers.index') }}" class="{{ request()->routeIs('admin.subscribers.index') ? 'active' : '' }}">
             <i class="bi bi-people"></i> Subscribers
           </a> 
           <a href="{{ route('admin.inquiries.index') }}" class="{{ request()->routeIs('admin.inquiries.index') ? 'active' : '' }}">
-            <i class="bi bi-inboxes"></i> Inquiries
+            <i class="bi bi-chat-dots"></i> Inquiries
           </a>    
+          <a href="{{ route('admin.partner-requests.index') }}" class="{{ request()->routeIs('admin.partner-requests.index') ? 'active' : '' }}">
+            <i class="bi bi-people"></i> Partner Requests
+          </a> 
+          <a href="{{ route('admin.retail-applications.index') }}" class="{{ request()->routeIs('admin.retail-applications.*') ? 'active' : '' }}">
+            <i class="bi bi-file-earmark-person"></i> Retail Applications
+          </a>   
           <a href="{{ route('admin.inquiry-types.index') }}" class="{{ request()->routeIs('admin.inquiry-types.index') ? 'active' : '' }}">
-            <i class="bi bi-inboxes"></i> Inquiry types
+            <i class="bi bi-ui-checks-grid"></i> Inquiry Types
           </a> 
           <a href="{{ route('admin.board-members.index') }}" class="{{ request()->routeIs('admin.board-members.index') ? 'active' : '' }}">
-            <i class="bi bi-people"></i> Board members
-          </a>                     
-          <a href="#"><i class="bi bi-briefcase"></i> Careers</a>
-          <a href="#"><i class="bi bi-gear"></i> Settings</a>
+            <i class="bi bi-person-badge"></i> Board Members
+          </a>   
+          <a href="{{ route('admin.blog-categories.index') }}" class="{{ request()->routeIs('admin.blog-categories.index') ? 'active' : '' }}">
+            <i class="bi bi-tags"></i> Blog Categories
+          </a> 
+          <a href="{{ route('admin.blogs.index') }}" class="{{ request()->routeIs('admin.blogs.index') ? 'active' : '' }}">
+            <i class="bi bi-journal-text"></i> Blogs
+          </a>                       
+          <a href="{{ route('admin.careers.index') }}" class="{{ request()->routeIs('admin.careers.index') ? 'active' : '' }}"><i class="bi bi-briefcase"></i> Careers</a>
+          <a href="{{ route('admin.settings.edit') }}" class="{{ request()->routeIs('admin.settings.edit') ? 'active' : '' }}">
+            <i class="bi bi-gear"></i> Settings
+          </a>
           <a href="{{ route('admin.logout') }}" class="mt-2" style="background:rgba(255,255,255,.10)">
             <i class="bi bi-box-arrow-right"></i> Logout
           </a>
-        </nav>
+        </nav>        
       </aside>
 
       <!-- Content -->

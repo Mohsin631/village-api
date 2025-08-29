@@ -11,6 +11,14 @@ use App\Http\Controllers\Admin\SubscribeNowAdminController;
 use App\Http\Controllers\Admin\InquiryAdminController;
 use App\Http\Controllers\Admin\InquiryTypeAdminController;
 use App\Http\Controllers\Admin\BoardMemberAdminController;
+use App\Http\Controllers\Admin\SiteSettingAdminController;
+use App\Http\Controllers\Admin\PartnerRequestAdminController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\BlogCategoryAdminController;
+use App\Http\Controllers\Admin\BlogAdminController;
+use App\Http\Controllers\Admin\CareerAdminController;
+use App\Http\Controllers\Admin\RetailApplicationAdminController;
+
 
 Route::get('/', function () {
     return response()->json([
@@ -72,5 +80,49 @@ Route::prefix('admin')->group(function () {
         Route::patch('board-members/{id}', [BoardMemberAdminController::class,'update'])->name('admin.board-members.update');
         Route::delete('board-members/{id}', [BoardMemberAdminController::class,'destroy'])->name('admin.board-members.destroy');
         Route::patch('board-members/{id}/toggle', [BoardMemberAdminController::class,'toggleStatus'])->name('admin.board-members.toggle');
+
+        // Settings
+        Route::get('settings', [SiteSettingAdminController::class,'edit'])->name('admin.settings.edit');
+        Route::post('settings', [SiteSettingAdminController::class,'update'])->name('admin.settings.update');
+
+        // Partner Requests
+        Route::get('partner-requests',        [PartnerRequestAdminController::class,'index'])->name('admin.partner-requests.index');
+        Route::get('partner-requests/{id}',   [PartnerRequestAdminController::class,'show'])->name('admin.partner-requests.show');
+        Route::delete('partner-requests/{id}',[PartnerRequestAdminController::class,'destroy'])->name('admin.partner-requests.destroy');
+        Route::get('partner-requests-export', [PartnerRequestAdminController::class,'export'])->name('admin.partner-requests.export');
+
+        // Profile
+        Route::get('profile', [ProfileController::class,'edit'])->name('admin.profile.edit');
+        Route::post('profile', [ProfileController::class,'update'])->name('admin.profile.update');
+
+        // Blog Categories
+        Route::get('blog-categories', [BlogCategoryAdminController::class,'index'])->name('admin.blog-categories.index');
+        Route::post('blog-categories', [BlogCategoryAdminController::class,'store'])->name('admin.blog-categories.store');
+        Route::get('blog-categories/{id}/edit', [BlogCategoryAdminController::class,'edit'])->name('admin.blog-categories.edit');
+        Route::patch('blog-categories/{id}', [BlogCategoryAdminController::class,'update'])->name('admin.blog-categories.update');
+        Route::delete('blog-categories/{id}', [BlogCategoryAdminController::class,'destroy'])->name('admin.blog-categories.destroy');
+
+        // Blogs
+        Route::get('blogs', [BlogAdminController::class,'index'])->name('admin.blogs.index');
+        Route::get('blogs/create', [BlogAdminController::class,'create'])->name('admin.blogs.create');
+        Route::post('blogs', [BlogAdminController::class,'store'])->name('admin.blogs.store');
+        Route::get('blogs/{id}/edit', [BlogAdminController::class,'edit'])->name('admin.blogs.edit');
+        Route::patch('blogs/{id}', [BlogAdminController::class,'update'])->name('admin.blogs.update');
+        Route::delete('blogs/{id}', [BlogAdminController::class,'destroy'])->name('admin.blogs.destroy');
+
+        //Careers
+        Route::get('careers', [CareerAdminController::class,'index'])->name('admin.careers.index');
+        Route::get('careers/create', [CareerAdminController::class,'create'])->name('admin.careers.create');
+        Route::post('careers', [CareerAdminController::class,'store'])->name('admin.careers.store');
+        Route::get('careers/{id}/edit', [CareerAdminController::class,'edit'])->name('admin.careers.edit');
+        Route::patch('careers/{id}', [CareerAdminController::class,'update'])->name('admin.careers.update');
+        Route::delete('careers/{id}', [CareerAdminController::class,'destroy'])->name('admin.careers.destroy');
+
+        // Retail Applications  
+        Route::get('retail-applications',            [RetailApplicationAdminController::class,'index'])->name('admin.retail-applications.index');
+        Route::get('retail-applications/export',     [RetailApplicationAdminController::class,'export'])->name('admin.retail-applications.export');
+        Route::get('retail-applications/{id}',       [RetailApplicationAdminController::class,'show'])->name('admin.retail-applications.show');
+        Route::get('retail-applications/{id}/cv',    [RetailApplicationAdminController::class,'downloadCv'])->name('admin.retail-applications.cv');
+        Route::delete('retail-applications-delete/{id}',    [RetailApplicationAdminController::class,'destroy'])->name('admin.retail-applications.destroy');
     });
 });
