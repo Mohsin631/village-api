@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\NewsletterAdminController;
 use App\Http\Controllers\Admin\SubscribeNowAdminController;
 use App\Http\Controllers\Admin\InquiryAdminController;
 use App\Http\Controllers\Admin\InquiryTypeAdminController;
+use App\Http\Controllers\Admin\BoardMemberAdminController;
 
 Route::get('/', function () {
     return response()->json([
@@ -63,5 +64,13 @@ Route::prefix('admin')->group(function () {
         Route::get('inquiry-types/{id}/edit', [InquiryTypeAdminController::class, 'edit'])->name('admin.inquiry-types.edit');
         Route::patch('inquiry-types/{id}', [InquiryTypeAdminController::class, 'update'])->name('admin.inquiry-types.update');
         Route::patch('inquiry-types/{id}/toggle', [InquiryTypeAdminController::class, 'toggleStatus'])->name('admin.inquiry-types.toggle');
+
+        // Board Members
+        Route::get('board-members', [BoardMemberAdminController::class,'index'])->name('admin.board-members.index');
+        Route::post('board-members', [BoardMemberAdminController::class,'store'])->name('admin.board-members.store');
+        Route::get('board-members/{id}/edit', [BoardMemberAdminController::class,'edit'])->name('admin.board-members.edit');
+        Route::patch('board-members/{id}', [BoardMemberAdminController::class,'update'])->name('admin.board-members.update');
+        Route::delete('board-members/{id}', [BoardMemberAdminController::class,'destroy'])->name('admin.board-members.destroy');
+        Route::patch('board-members/{id}/toggle', [BoardMemberAdminController::class,'toggleStatus'])->name('admin.board-members.toggle');
     });
 });
