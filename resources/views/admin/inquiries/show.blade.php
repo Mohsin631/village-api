@@ -84,6 +84,11 @@
         <div class="alert alert-success py-2 px-3">{{ session('status') }}</div>
       @endif
 
+      <a href="{{ route('admin.mail.create',['emails'=>$inquiry->email]) }}" 
+        class="btn btn-gold w-100 mb-3">
+       <i class="bi bi-envelope-paper me-1"></i> Send Mail
+     </a>
+
       <form action="{{ route('admin.inquiries.update',$inquiry->id) }}" method="POST" class="d-grid gap-2">
         @csrf @method('PATCH')
 

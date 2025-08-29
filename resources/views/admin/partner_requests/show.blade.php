@@ -85,6 +85,10 @@
   <div class="col-12 col-lg-4">
     <div class="card-soft">
       <h5 class="mb-3">Actions</h5>
+      <a href="{{ route('admin.mail.create',['emails'=>$request->email]) }}" 
+        class="btn btn-gold w-100 mb-3">
+       <i class="bi bi-envelope-paper me-1"></i> Send Mail
+     </a>
       <form action="{{ route('admin.partner-requests.destroy',$request->id) }}" method="POST" onsubmit="return confirm('Delete this request?')">
         @csrf @method('DELETE')
         <button class="btn btn-outline-danger w-100"><i class="bi bi-trash me-1"></i> Delete</button>

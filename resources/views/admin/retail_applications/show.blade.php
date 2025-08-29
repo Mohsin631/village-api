@@ -85,10 +85,15 @@
   <div class="col-12 col-lg-4">
     <div class="card-soft">
       <h5 class="mb-3">Actions</h5>
+   
       <form action="{{ route('admin.retail-applications.destroy',$app->id) }}" method="POST" onsubmit="return confirm('Delete this application?')">
         @csrf @method('DELETE')
-        <button class="btn btn-outline-danger w-100"><i class="bi bi-trash me-1"></i> Delete</button>
+        <button class="btn btn-outline-danger w-100 mb-3"><i class="bi bi-trash me-1"></i> Delete</button>
       </form>
+      <a href="{{ route('admin.mail.create',['emails'=>$app->email]) }}" 
+        class="btn btn-gold w-100">
+       <i class="bi bi-envelope-paper me-1"></i> Send Mail
+     </a>
       @if($app->cv_path)
         <a href="{{ route('admin.retail-applications.cv',$app->id) }}" class="btn btn-gold w-100 mt-2">
           <i class="bi bi-download me-1"></i> Download CV

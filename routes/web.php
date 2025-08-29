@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\BlogCategoryAdminController;
 use App\Http\Controllers\Admin\BlogAdminController;
 use App\Http\Controllers\Admin\CareerAdminController;
 use App\Http\Controllers\Admin\RetailApplicationAdminController;
+use App\Http\Controllers\Admin\MailAdminController;
 
 
 Route::get('/', function () {
@@ -124,5 +125,9 @@ Route::prefix('admin')->group(function () {
         Route::get('retail-applications/{id}',       [RetailApplicationAdminController::class,'show'])->name('admin.retail-applications.show');
         Route::get('retail-applications/{id}/cv',    [RetailApplicationAdminController::class,'downloadCv'])->name('admin.retail-applications.cv');
         Route::delete('retail-applications-delete/{id}',    [RetailApplicationAdminController::class,'destroy'])->name('admin.retail-applications.destroy');
+
+        //Send mails
+        Route::get('send-mail',  [MailAdminController::class, 'create'])->name('admin.mail.create');
+        Route::post('send-mail', [MailAdminController::class, 'send'])->name('admin.mail.send');
     });
 });

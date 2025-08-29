@@ -113,7 +113,7 @@
       <div class="card-soft">
         <h5 class="mb-3">Quick Actions</h5>
         <div class="d-flex flex-wrap gap-2">
-          <a class="btn btn-gold" href="#"><i class="bi bi-plus-lg me-1"></i>Send Email</a>
+          <a class="btn btn-gold" href="{{ route('admin.mail.create') }}"><i class="bi bi-plus-lg me-1"></i>Send Email</a>
           <a class="btn btn-outline-secondary" href="{{ route('admin.settings.edit') }}"><i class="bi bi-gear me-1"></i>System Settings</a>
         </div>
       </div>
