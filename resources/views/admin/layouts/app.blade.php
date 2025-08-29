@@ -222,7 +222,10 @@
           </a> 
           <a href="{{ route('admin.inquiries.index') }}" class="{{ request()->routeIs('admin.inquiries.index') ? 'active' : '' }}">
             <i class="bi bi-inboxes"></i> Inquiries
-          </a>                   
+          </a>    
+          <a href="{{ route('admin.inquiry-types.index') }}" class="{{ request()->routeIs('admin.inquiry-types.index') ? 'active' : '' }}">
+            <i class="bi bi-inboxes"></i> Inquiry types
+          </a>                
           <a href="#"><i class="bi bi-briefcase"></i> Careers</a>
           <a href="#"><i class="bi bi-gear"></i> Settings</a>
           <a href="{{ route('admin.logout') }}" class="mt-2" style="background:rgba(255,255,255,.10)">

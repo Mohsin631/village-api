@@ -9,6 +9,7 @@ use App\Http\Middleware\AdminTwoFactor;
 use App\Http\Controllers\Admin\NewsletterAdminController;
 use App\Http\Controllers\Admin\SubscribeNowAdminController;
 use App\Http\Controllers\Admin\InquiryAdminController;
+use App\Http\Controllers\Admin\InquiryTypeAdminController;
 
 Route::get('/', function () {
     return response()->json([
@@ -55,5 +56,12 @@ Route::prefix('admin')->group(function () {
         Route::delete('inquiries/{id}',      [InquiryAdminController::class,'destroy'])->name('admin.inquiries.destroy');
         Route::post('inquiries/bulk-delete', [InquiryAdminController::class,'bulkDelete'])->name('admin.inquiries.bulkDelete');
         Route::get('inquiries-export',       [InquiryAdminController::class,'export'])->name('admin.inquiries.export');
+
+        // Inquires types
+        Route::get('inquiry-types', [InquiryTypeAdminController::class, 'index'])->name('admin.inquiry-types.index');
+        Route::post('inquiry-types', [InquiryTypeAdminController::class, 'store'])->name('admin.inquiry-types.store');
+        Route::get('inquiry-types/{id}/edit', [InquiryTypeAdminController::class, 'edit'])->name('admin.inquiry-types.edit');
+        Route::patch('inquiry-types/{id}', [InquiryTypeAdminController::class, 'update'])->name('admin.inquiry-types.update');
+        Route::patch('inquiry-types/{id}/toggle', [InquiryTypeAdminController::class, 'toggleStatus'])->name('admin.inquiry-types.toggle');
     });
 });
